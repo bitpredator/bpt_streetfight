@@ -25,19 +25,19 @@ end)
 
 RegisterNetEvent('bpt_streetfight:playerJoined')
 AddEventHandler('bpt_streetfight:playerJoined', function(side, id)
+    
+    if side == 1 then
+        blueJoined = true
+    else
+        redJoined = true
+    end
 
-        if side == 1 then
-            blueJoined = true
-        else
-            redJoined = true
-        end
-
-        if id == GetPlayerServerId(PlayerId()) then
-            participating = true
-            putGloves()
-        end
-        players = players + 1
-        fightStatus = STATUS_JOINED
+    if id == GetPlayerServerId(PlayerId()) then
+        participating = true
+        putGloves()
+    end
+    players = players + 1
+    fightStatus = STATUS_JOINED
 
 end)
 
@@ -144,8 +144,8 @@ end
 function putGloves()
     local ped = GetPlayerPed(-1)
     local hash = GetHashKey('prop_boxing_glove_01')
-    while not HasModelLoaded(hash) do RequestModel(hash); 
-        Wait(0); 
+    while not HasModelLoaded(hash) do RequestModel(hash);
+        Wait(0);
     end
     local pos = GetEntityCoords(ped)
     local gloveA = CreateObject(hash, pos.x,pos.y,pos.z + 0.50, true,false,false)
